@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>eat</title>
+    <style>
+        #map{
+            background-image: url("imgs/background.png");
+        }
+    </style>
+    <script src="js/game.js"></script>
+</head>
+<body onkeydown="control();">
+<canvas id="map" width="512px" height="480px"></canvas>
+<div>
+    <label>count:</label><span id="cnt">0</span>
+</div>
+<script>
+    var canvas1=document.getElementById("map");
+    var cxt=canvas1.getContext("2d");
+    var hero=new Hero(140,140,0,"#e1e1e1");
+    var enemy=new Enemy(340,340,"#e65");
+    flashMap();
+    function flashMap() {
+        cxt.clearRect(0, 0, 512, 480);
+        DrawTank(hero);
+        DrawEnemy(enemy);
+        pick(hero,enemy);
+    }
+    function control() {
+        var key = event.keyCode;
+        switch (key) {
+            case 87:
+                hero.moveUp();
+                break;
+            case 68:
+                hero.moveRight();
+                break;
+            case 83:
+                hero.moveDown();
+                break;
+            case 65:
+                hero.moveLeft();
+                break;
+        }
+        flashMap();
+    }
+    window.setInterval("flashMap()",100);
+</script>
+</body>
+</html>
